@@ -78,7 +78,7 @@ def phasecong2(im):
     thetaSigma = np.pi/norient/dThetaOnSigma
 
     _, _, rows,cols = im.shape
-    imagefft = torch.rfft(im,2,onesided=False)
+    imagefft = torch.fft.rfft(im,2,onesided=False)
     
     lp = lowpassfilter((rows,cols),.45,15)
 

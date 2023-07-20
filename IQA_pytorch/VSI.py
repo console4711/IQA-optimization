@@ -72,9 +72,9 @@ def SDSP(img,sigmaF,omega0,sigmaD,sigmaC):
 
     lab = rgb_to_lab_NCHW(img/255)
     LChannel, AChannel, BChannel = lab[:,0,:,:].unsqueeze(1),lab[:,1,:,:].unsqueeze(1),lab[:,2,:,:].unsqueeze(1)
-    LFFT = torch.rfft(LChannel,2,onesided=False)
-    AFFT = torch.rfft(AChannel,2,onesided=False)
-    BFFT = torch.rfft(BChannel,2,onesided=False)
+    LFFT = torch.fft.rfft(LChannel,2,onesided=False)
+    AFFT = torch.fft.rfft(AChannel,2,onesided=False)
+    BFFT = torch.fft.rfft(BChannel,2,onesided=False)
     
     LG = logGabor(rows,cols,omega0,sigmaF)
     LG = torch.from_numpy(LG).reshape(1, 1, rows,cols,1).repeat(B,1,1,1,2).float().to(img.device)
